@@ -1,12 +1,12 @@
 
-/* This script is used to change a user's TeamDynamix security role, client portal security role, and ticketing
+<# This script is used to change a user's TeamDynamix security role, client portal security role, and ticketing
    application security role. It also sets the available applications for the user depending on their roles.
    
-   All credentials and identifiable information are NOT included. THIS WILL NOT RUN. */
+   All credentials and identifiable information are NOT included. THIS WILL NOT RUN. #>
 
 
 # TeamDynamix web API base link
-$uri = "https:///*institutionName*/.teamdynamix.com/TDWebApi/api/"
+$uri = "https://<#institutionName#>.teamdynamix.com/TDWebApi/api/"
 
 # API content requirement
 $thisContent = "application/json; charset=utf-8"
@@ -16,7 +16,7 @@ $thisContent = "application/json; charset=utf-8"
 function authorization {
 
     $authUri = $uri + "auth/loginadmin"
-    $authBody = '{BEID: "/*institutionBEID*/", WebServicesKey: "/*institutionWebServicesKey*/"}'
+    $authBody = '{BEID: "<#institutionBEID#>", WebServicesKey: "<#institutionWebServicesKey#>"}'
     $authKey = Invoke-RestMethod -Uri $authUri -ContentType $thisContent -Method Post -Body $authBody
 
     # Create $authHeader dictionary and assign $authKey response token
@@ -107,66 +107,66 @@ function changeRole ($auth, $usrUid, $usrRole) {
 
     switch ($usrRole) {
         "client" {           
-            $globalRole = "/*globalRoleGuid*/"
-            $clientPortalRole = "/*clientPortalRoleGuid*/"
+            $globalRole = "<#globalRoleGuid#>"
+            $clientPortalRole = "<#clientPortalRoleGuid#>"
             $clientRoleName = "Client"
             $apps = @("")
         }
         "student" {
-            $globalRole = "/*globalRoleGuid*/"
-            $clientPortalRole = "/*clientPortalRoleGuid*/"
+            $globalRole = "<#globalRoleGuid#>"
+            $clientPortalRole = "<#clientPortalRoleGuid#>"
             $clientRoleName = "Student Technician"
-            $marComClientPortalRole = "/*marCommClientPortalRoleGuid*/"
+            $marComClientPortalRole = "<#marCommClientPortalRoleGuid#>"
             $marComClientRoleName = "Client"
-            $ticketRole = "/*ticketRoleGuid*/"
+            $ticketRole = "<#ticketRoleGuid#>"
             $ticketRoleName = "Technician"
             $apps = @("TDFileCabinet","MyWork","TDPeople","TDProjects","TDNext","TDTimeExpense")
         }
         "technician" {
-            $globalRole = "/*globalRoleGuid*/"
-            $clientPortalRole = "/*clientPortalRoleGuid*/"
+            $globalRole = "<#globalRoleGuid#>"
+            $clientPortalRole = "<#clientPortalRoleGuid#>"
             $clientRoleName = "Technician"
-            $marComClientPortalRole = "/*marCommClientPortalRoleGuid*/"
+            $marComClientPortalRole = "<#marCommClientPortalRoleGuid#>"
             $marComClientRoleName = "Client"
-            $ticketRole = "/*ticketRoleGuid*/"
+            $ticketRole = "<#ticketRoleGuid#>"
             $ticketRoleName = "Technician"
             $apps = @("TDFileCabinet","MyWork","TDPeople","TDProjects","TDNext","TDTimeExpense")
         }
         "pmo" {
-            $globalRole = "/*globalRoleGuid*/"
-            $clientPortalRole = "/*clientPortalRoleGuid*/"
+            $globalRole = "<#globalRoleGuid#>"
+            $clientPortalRole = "<#clientPortalRoleGuid#>"
             $clientRoleName = "Manager"
-            $marComClientPortalRole = "/*marCommClientPortalRoleGuid*/"
+            $marComClientPortalRole = "<#marCommClientPortalRoleGuid#>"
             $marComClientRoleName = "Client"
-            $ticketRole = "/*ticketRoleGuid*/"
+            $ticketRole = "<#ticketRoleGuid#>"
             $ticketRoleName = "Manager"
             $apps = @("TDAnalysis","TDFileCabinet","TDFinance","MyWork","TDPeople","TDPP","TDPortfolios","TDTemplate","TDProjects","TDResourceManagement","TDNext","TDTimeExpense")
         }
         "executive" {
-            $globalRole = "/*globalRoleGuid*/"
-            $clientPortalRole = "/*clientPortalRoleGuid*/"
+            $globalRole = "<#globalRoleGuid#>"
+            $clientPortalRole = "<#clientPortalRoleGuid#>"
             $clientRoleName = "Client Project Requestor"
-            $marComClientPortalRole = "/*marCommClientPortalRoleGuid*/"
+            $marComClientPortalRole = "<#marCommClientPortalRoleGuid#>"
             $marComClientRoleName = "Client"
             $apps = @("TDAnalysis","TDFileCabinet","TDFinance","MyWork","TDPP","TDPortfolios","TDProjects","TDResourceManagement","TDNext")
         }
         "manager" {
-            $globalRole = "/*globalRoleGuid*/"
-            $clientPortalRole = "/*clientPortalRoleGuid*/"
+            $globalRole = "<#globalRoleGuid#>"
+            $clientPortalRole = "<#clientPortalRoleGuid#>"
             $clientRoleName = "Manager"
-            $marComClientPortalRole = "/*marCommClientPortalRoleGuid*/"
+            $marComClientPortalRole = "<#marCommClientPortalRoleGuid#>"
             $marComClientRoleName = "Client"
-            $ticketRole = "/*ticketRoleGuid*/"
+            $ticketRole = "<#ticketRoleGuid#>"
             $ticketRoleName = "Manager"
             $apps = @("TDAnalysis","TDFileCabinet","TDFinance","MyWork","TDPeople","TDPP","TDPortfolios","TDProjects","TDResourceManagement","TDNext","TDTimeExpense")
         }
         "administrator" {
-            $globalRole = "/*globalRoleGuid*/"
-            $clientPortalRole = "/*clientPortalRoleGuid*/"
+            $globalRole = "<#globalRoleGuid#>"
+            $clientPortalRole = "<#clientPortalRoleGuid#>"
             $clientRoleName = "Administrator"
-            $marComClientPortalRole = "/*marCommClientPortalRoleGuid*/"
+            $marComClientPortalRole = "<#marCommClientPortalRoleGuid#>"
             $marComClientRoleName = "Client"
-            $ticketRole = "/*ticketRoleGuid*/"
+            $ticketRole = "<#ticketRoleGuid#>"
             $ticketRoleName = "Administrator"
             $apps = @("TDAnalysis","TDCommunity","TDFileCabinet","TDFinance","MyWork","TDPeople","TDPP","TDPortfolios","TDTemplate","TDProjects","TDResourceManagement","TDNext","TDTimeExpense")
         }
@@ -187,14 +187,14 @@ function changeRole ($auth, $usrUid, $usrRole) {
             SecurityRoleID=$clientPortalRole
             SecurityRoleName=$clientRoleName
             IsAdministrator="False"
-            ID="/*clientPortalId*/"
+            ID="<#clientPortalId#>"
         },
         @{
             # Variables for the Ticketing application
             SecurityRoleID=$ticketRole
             SecurityRoleName=$ticketRoleName
             IsAdministrator="False"
-            ID="/*ticketingAppId*/"
+            ID="<#ticketingAppId#>"
         }
     )
 
